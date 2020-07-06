@@ -1,0 +1,134 @@
+﻿{
+    "Messages": [
+        {
+            "cislo": "0",
+            "message_nazev": "Nástup všemi dveřmi",
+            "maly_cz": "Nastupujte všemi dveřmi",
+            "maly_en": "Use all the doors",
+            "maly_de": "Nutzen Sie alle Türe"
+        },
+        {
+            "cislo": "1",
+            "message_nazev": "Vůz jízdu končí",
+            "maly_cz": "Vůz jízdu končí",
+            "maly_en": "The end of route",
+            "maly_de": "Das Fahrzeug endet hier"
+        },
+        {
+            "cislo": "2",
+            "message_nazev": "Vůz má poruchu",
+            "maly_cz": "Vůz má poruchu",
+            "maly_en": "The vehicle is out of order",
+            "maly_de": "Das Fahrzeug ist kaputt",
+            "tvn_cz_nadpis": "Pozor!",
+            "tvn_en_nadpis": "Attention!",
+            "tvn_cz_message": "Vůz má poruchu!<br>Prosím, vystupte z vozu,<br>autobus náhradní dopravy<br>je již na cestě.",
+            "tvn_en_message": "Vehicle failure! Please leave the vehicle,<br>the replacement bus shall arrive soon.",
+            "tvn_format": "color: white; background-color: red"
+        },
+        {
+            "cislo": "3",
+            "message_nazev": "Kontrola jízdenek",
+            "maly_cz": "Kontrola jízdenek",
+            "maly_en": "Ticket inspection",
+            "maly_de": "Fahrkartenkontrolle"
+        },
+        {
+            "cislo": "4",
+            "message_nazev": "Klid ve vozidle",
+            "maly_cz": "Prosíme o klid ve vozidle",
+            "maly_en": "Please be quiet",
+            "maly_de": "Seid ruhig bitte"
+        },
+        {
+            "cislo": "5",
+            "message_nazev": "Varování před kapsáři",
+            "maly_cz": "Dávejte pozor na kapsáře",
+            "maly_en": "Take care of your papers",
+            "maly_de": "Achten Sie auf Ihre Sachen"
+        },
+        {
+            "cislo": "6",
+            "message_nazev": "Čekání na čas odjezdu",
+            "maly_cz": "Čekáme na čas pravidelného odjezdu",
+            "maly_en": "Waiting for the time of departure",
+            "maly_de": "Wir warten auf die Abfahrtszeit"
+        },
+        {
+            "cislo": "7",
+            "message_nazev": "Výsuvná plošina",
+            "maly_cz": "Pozor na výsuvnou plošinu",
+            "maly_en": "Pay attention to the wheelchair ramp",
+            "maly_de": "Achten Sie auf die Hebebühne"
+        },
+        {
+            "cislo": "8",
+            "message_nazev": "Vůz obsazen",
+            "maly_cz": "Vůz je obsazen",
+            "maly_en": "The vehicle is full",
+            "maly_de": "Das Fahrzeug ist voll"
+        },
+        {
+            "cislo": "9",
+            "message_nazev": "Uvolněte výhled",
+            "maly_cz": "Uvolněte řidiči výhled",
+            "maly_en": "Get out of the driver's view",
+            "maly_de": "Bitte die Aussicht des Fahrers freihalten"
+        },
+        {
+            "cislo": "10",
+            "message_nazev": "Postupte do vozu",
+            "maly_cz": "Postupte do vozu",
+            "maly_en": "Move further into the vehicle",
+            "maly_de": "Bitte geht weiter in das Fahrzeug"
+        },
+        {
+            "cislo": "11",
+            "message_nazev": "Nástup s kočárkem",
+            "maly_cz": "Nástup s kočárek signalizujte řidiči",
+            "maly_en": "Sign if you get on and off with a stroller",
+            "maly_de": "Signalisieren Sie Ihren Einstieg und Ausstieg"
+        },
+        {
+            "cislo": "12",
+            "message_nazev": "Odklon",
+            "maly_cz": "Vůz jede odklonem",
+            "maly_en": "The vehicle goes through a diversion",
+            "maly_de": "Das Fahrzeug fährt durch die Umleitung",
+            "tvn_cz_nadpis": "Pozor!",
+            "tvn_en_nadpis": "Attention!",
+            "tvn_cz_message": "Vůz jede odklonem!",
+            "tvn_en_message": "The vehicle goes through the diversion.",
+            "tvn_format": "color: black; background-color: yellow"
+        },
+        {
+            "cislo": "13",
+            "message_nazev": "Klimatizace",
+            "maly_cz": "Neotevírejte okna. Vůz má klimatizaci. Při otevřených oknech je neúčinná."
+        },
+        {
+            "cislo": "14",
+            "message_nazev": "Tlačítka signalizace",
+            "maly_cz": "Nepoužívejte zbytečně tlačítka signalizace"
+        },
+        {
+            "cislo": "15",
+            "message_nazev": "Zákaz potravin",
+            "maly_cz": "Cestující s jídlem nebo pitím, vystupte!"
+        },
+        {
+            "cislo": "16",
+            "message_nazev": "Znamení kočárek",
+            "maly_cz": "Prosíme cestující s kočárkem, aby svůj výstup/nástup včas signalizovali řidiči!"
+        },
+        {
+            "cislo": "17",
+            "message_nazev": "Výluka x2",
+            "tvn_cz_nadpis": "Pozor!",
+            "tvn_en_nadpis": "Attention!",
+            "tvn_cz_message": "Plánovaná výluka!<br>Přestupujte na autobus<br>náhradní dopravy linky x2<br>v zastávce Nové sady.",
+            "tvn_en_message": "Scheduled service change! Change to<br>replacement bus line x2 at Nové sady.",
+            "tvn_format": "color: black; background-color: yellow"
+        }
+    ]
+}
