@@ -1,0 +1,22 @@
+<template>
+  <th class="celni_smer">ŘEČKOVICE</th>
+</template>
+
+<script>
+export default {
+  name: 'DestinationOneLineOut',
+};
+</script>
+
+<style lang="scss" scoped>
+
+.celni_smer {
+	height: 50px;
+	width: 350px;
+    border: 1px solid black;
+    background: none;
+    color: #0DC958;
+    font-size: 42px;
+}
+
+</style>

@@ -14,7 +14,7 @@ export default {
 </script>
 
 <style>
-#app {
+html {
   background-color: darkgrey;
   font-family: Arial;
 }
