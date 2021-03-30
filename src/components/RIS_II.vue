@@ -1,238 +1,61 @@
 <template>
-  <!DOCTYPE html>
-<!--<html>-->
-<!--<head>
-	<meta charset="utf-8" />
-	<title>MHD Brno</title>
-	<link rel="stylesheet" type="text/css" href="MHD_Brno-CSS.css">
-	<script src="https://api.mapy.cz/loader.js"></script>-->
-	<!--<script>Loader.load()</script>-->
-	<!--<script src="MHD_Brno-JS.js" type="text/javascript"></script>-->
+  <br />
+  <info-out-front></info-out-front>
+  <br />
+  <info-out-back></info-out-back>
+  <br />
+  <info-out-side></info-out-side>
+  <br />
+  <info-inside-oneline></info-inside-oneline>
+  <br />
+  <info-out-duty></info-out-duty>
+  <br />
+  <info-inside-tv1></info-inside-tv1>
+  <br />
+  <info-inside-tv2></info-inside-tv2>
+  <br />
+  <info-inside-tp></info-inside-tp>
+  <br />
+  <!--<input type="button" id="nastaveni" value="Nastavení" onclick="nastaveni(data)" onkeydown="key(event)" />-->
+  <input type="button" id="dalsi" value="▼" onclick="dalsi()" onkeydown="key(event)" />
+  <input
+    type="button"
+    id="konec"
+    value="KONEC"
+    onclick="konec()"
+    onkeydown="key(event)"
+  />
+  <!--<input type="button" id="rucnihlaseni" value="RUČNÍ HLÁŠENÍ" onclick="rucni()" onkeydown="key(event)"/>-->
 
-<br>
-<table id="venku_celni">
-  <tr>
-    <line-out></line-out>
-    <destination-one-line-out></destination-one-line-out>
-  </tr>
-</table>
+  <div id="PC">
+    <input type="text" name="" placeholder="vložte kurz" />
+    <select name="režim">
+      <option selected="selected">standardní režim</option>
+      <option>bez přihlášeného řidiče (X)</option>
+      <option>řidič v zácviku (Z)</option>
+      <option>odklon (K)</option>
+      <option>posilový spoj (P)</option>
+      <option>náhradní doprava (N)</option>
+      <option>odlišný cíl (C)</option>
+    </select>
+    <select name="route">
+      <option selected="selected">zvolte linku a směr</option>
+    </select>
+    <br />
+    <select name="message">
+      <option selected="selected">zvolte ruční hlášení</option>
+    </select>
+  </div>
 
-<br>
-<table id="venku_zadni">
-  <tr>
-    <line-out></line-out>
-  </tr>
-</table>
+  <br />
+  <p id="tiraz">
+    <b>
+      Autor: Jan BRODSKÝ, Brno 2021. Optimalizováno pro prohlížeč Mozilla Firefox verze
+      77.x
+    </b>
+  </p>
 
-<br>
-<table id="venku_bocni">
-  <tr>
-	<line-out rowspan=2></line-out>
-    <th class="bocni_pres" id="bocni_pres">-Semilasso-</th>
-  </tr>
-  <tr>
-  <th class="bocni_smer" id="bocni_smer">ŘEČKOVICE</th>
-  </tr>
-</table>
-<br>
-<table class="vnitrni_maly" id="vnitrni_maly_1">
-	<tr>
-		<th class="vnitrni_maly_Tzastavka" id="vnitrni_maly1_zastavka0">T - Moravské náměstí</th>
-		<th class="vnitrni_maly_cas" id="vnitrni_maly1_cas">21:45</th>
-	</tr>
-</table>
-<table class="vnitrni_maly" id="vnitrni_maly_2">
-	<tr>
-		<th class="vnitrni_maly_linka" id="vnitrni_maly2_linka">1</th>
-		<th class="vnitrni_maly_zona" id="vnitrni_maly2_zona0">Zóna 100</th>
-		<th class="vnitrni_maly_cas" id="vnitrni_maly2_cas">21:45</th>
-	</tr>
-</table>
-<table class="vnitrni_maly" id="vnitrni_maly_3">
-	<tr>
-		<th class="vnitrni_maly_linka" id="vnitrni_maly3_linka">1</th>
-		<th class="vnitrni_maly_smer" id="vnitrni_maly3_zastavkak">ŘEČKOVICE</th>
-	</tr>
-</table>
-<table class="vnitrni_maly" id="vnitrni_maly_4">
-	<tr>
-		<th class="vnitrni_maly_znameni" > 
-		<marquee HEIGHT="100%" width="100%"  behavior=scroll direction=left scrollamount="5" scrolldelay="20" id="vnitrni_maly4_znameni0">Zastávka na znamení</marquee>
-	</th>
-	</tr>
-</table>
-<table class="vnitrni_maly" id="vnitrni_maly_5">
-	<tr>
-		<th class="vnitrni_maly_sights">
-		<marquee HEIGHT="100%" width="100%"  behavior=scroll direction=left scrollamount="5" scrolldelay="20" id="vnitrni_maly5_sights0">Rektorát MU</marquee>
-		</th>
-	</tr>
-</table>
-<br>
-<table>
-    <tr >
-        <th class="kurz_zacvik" id="kurz_zacvik" colspan=2></th>
-    </tr>
-	<tr id="kurzovka">
-		<th class="kurz_priznak" id="kurz_priznak">Z</th>
-		<th class="kurz_linka" id="kurz_linka">001</th>
-		<th class="kurz_por" id="kurz_por">01</th>
-	</tr>
-</table>
-<br>
-<table id="vnitrni_tv">
-    <tr><th class="tv_okrajhd" colspan=5></th></tr>
-    <tr>
-        <th class="tv_okrajlp" rowspan=9></th>
-        <th id="tv_linka" class="tv_linka">1</th>
-        <th class="tv_zastavkak" id="tv_zastavkak">ŘEČKOVICE</th>
-        <th class="tv_zonacas" id="tv_cas">21:45</th>
-        <th class="tv_okrajlp" rowspan=9></th>
-    </tr>
-    <tv1-stop></tv1-stop>
-    <tv1-stop></tv1-stop>
-    <tv1-stop></tv1-stop>
-	<tv1-stop></tv1-stop>
-  <tr>
-    <th class="tv_okrajhd" colspan=5></th>
-  </tr>
-</table>
-
-<table id="vnitrni_tvn">
-	<tr><th class="tvn_okrajhd" colspan=8></th></tr>
-	<tr>
-		<th class="tvn_okrajlp" rowspan=8></th>
-		<th class="tvn_linka" id="tvn_linka" rowspan="3" style="background-color: darkblue; color:red; width: 50px; height: 50px; font-size: 35px; font-weight: bold">1</th>
-		<th style="background-color: darkblue; width: 15px"></th>
-		<th id="tvn_zastavkatext" style="background-color: darkblue; color:white; font-size: 10px; text-align: left; height: 15px; width: 140px">zastávka - stop</th>
-		<th id="tvn_zonatext" class="tvn_zonax" style="font-size: 10px; width: 25px">Zóna</th>
-		<th class="tvn_info" id="tvn_info" rowspan="9" style="width: 190px; height: 100%"> </th>
-		<th class="tvn_okrajlp" rowspan=8></th>
-	</tr>
-	<tr>
-		<tv2-stop></tv2-stop>
-	</tr>
-	<tr>
-		<th class="tvn_zastavkax"></th>
-		<th class="tvn_zastavkax" style="text-align:center;font-size:10px">žádné přestupy - no transfers</th>
-		<th class="tvn_zonax"></th>
-	</tr>
-	<tr>
-		<th class="tvn_linkacas"> </th>
-		<tv2-stop></tv2-stop>
-	</tr>
-	<tr>
-		<th class="tvn_linkacas" id="tvn_dendatum" style="font-size: 10px">pondělí<br>29.03.<br>2021</th>
-		<tv2-stop></tv2-stop>
-	</tr>
-	<tr>
-		<th class="tvn_linkacas" id="tvn_cas" style="font-size: 20px">21:45</th>
-		<tv2-stop></tv2-stop>
-	</tr>
-	<tr>
-		<th rowspan="2" id="tvn_Brno" class="tvn_Brno" style="background-color: darkblue"></th>
-		<th style="background-color: white"></th>
-		<th id="tvn_smertext" style="background-color: white; font-size: 10px; height: 15px; text-align: left;">směr - destination</th>
-		<th class="tvn_zonax"></th>
-	</tr>
-	<tr>		
-		<th style="background-color: white"></th>
-		<th class="tvn_zastavkak" id="tvn_zastavkak">ŘEČKOVICE</th>
-		<th class="tvn_zonax" id="tvn_zonak">101</th>
-	</tr>
-	<tr><th class="tvn_okrajhd" colspan=7></th></tr>
-</table>
-
-<table id="vnitrni_tp" style="border-spacing: 0px">
-	<tr>
-		<td id="tp_linka" rowspan="2">1</td>
-		<td></td>
-		<td id="tp_den" colspan="2">pondělí</td>
-		<td id="tp_datum" colspan="2">29.3.2021</td>
-		<td colspan="4"></td>
-		<td id="tp_konec_popis" colspan="4">Konečná zastávka</td>
-		<td id="tp_mapa" rowspan="9"><div id="mapa" style="width:250px; height:250px;"></div></td>
-	</tr>
-	<tr>
-		<td></td>
-		<td id="tp_cas" colspan="4">21:45</td>
-		<td colspan="4"></td>
-		<td id="tp_zastavkak" class="tp_zastavka_konec" colspan="4">ŘEČKOVICE</td>
-	</tr>
-	<tr>
-		<td colspan="2" height="20px"></td>
-		<tp-stop></tp-stop>
-		<tp-stop></tp-stop>
-		<tp-stop></tp-stop>
-		<tp-stop></tp-stop>
-		<tp-stop></tp-stop>
-		<tp-stop></tp-stop>
-		<tp-stop></tp-stop>
-		<tp-stop></tp-stop>
-		<tp-stop></tp-stop>
-		<tp-stop></tp-stop>
-		<tp-stop></tp-stop>
-		<tp-stop></tp-stop>
-	</tr>
-	<tr>
-		<td id="tp_zast_prakt" colspan="2">Aktuální/příští zastávka</td>
-	</tr>
-	<tr>
-		<td id="tp_zastavka0" colspan="2">Moravské náměstí</td>
-	</tr>
-	<tr>
-		<td  id="tp_zona0" class="tp_zona" colspan="2">Zóna: 100</td>
-	</tr>
-	<tr>
-		<td colspan="2"></td>
-	</tr>
-	<tr>
-		<td colspan="2"></td>
-		<tp-stop-demand></tp-stop-demand>
-		<tp-stop-demand></tp-stop-demand>
-		<tp-stop-demand></tp-stop-demand>
-		<tp-stop-demand></tp-stop-demand>
-		<tp-stop-demand></tp-stop-demand>
-		<tp-stop-demand></tp-stop-demand>
-		<tp-stop-demand></tp-stop-demand>
-		<tp-stop-demand></tp-stop-demand>
-		<tp-stop-demand></tp-stop-demand>
-		<tp-stop-demand></tp-stop-demand>
-		<tp-stop-demand></tp-stop-demand>
-		<tp-stop-demand></tp-stop-demand>
-	</tr>
-	<tr>
-		<td colspan="12"></td>
-		<td colspan="2" class="tp_znameni" id="tp_znameni_popis">...na znamení</td>
-	</tr>
-
-</table>
-<br>
-<!--<input type="button" id="nastaveni" value="Nastavení" onclick="nastaveni(data)" onkeydown="key(event)" />-->
-<input type="button" id="konec" value="KONEC" onclick="konec()" onkeydown="key(event)"/>
-<input type="button" id="dalsi" value="▼" onclick="dalsi()" onkeydown="key(event)"/>
-<!--<input type="button" id="rucnihlaseni" value="RUČNÍ HLÁŠENÍ" onclick="rucni()" onkeydown="key(event)"/>-->
-
-<div id="PC">
-	<input type="text" name="" placeholder="vložte kurz">
-	<select name="režim">
-		<option selected="selected">standardní režim</option>
-		<option>bez přihlášeného řidiče (X)</option>
-		<option>řidič v zácviku (Z)</option>
-		<option>odklon (K)</option>
-		<option>posilový spoj (P)</option>
-		<option>náhradní doprava (N)</option>
-		<option>odlišný cíl (C)</option>
-	</select>
-	<select name="route"><option selected="selected">zvolte linku a směr</option></select>
-	<br>
-	<select name="message"><option selected="selected">zvolte ruční hlášení</option></select>
-</div>
-
-<br>
-<p id="tiraz"><b>Autor: Jan BRODSKÝ, Brno 2021. Optimalizováno pro prohlížeč Mozilla Firefox verze 77.x</b></p>
-
-<!-- X = vůz jede bez přihlášeného řidiče,
+  <!-- X = vůz jede bez přihlášeného řidiče,
 	Z = ve voze je řidič v zácviku,
 	K = vozidlo jede v režimu Odklon,
 	P = vozidlo jede v režimu Posila,
@@ -241,631 +64,134 @@
 </template>
 
 <script>
-import DestinationOneLineOut from './DestinationOneLineOut.vue'
-import LineOut from './LineOut.vue'
-import TV1Stop from './TV1Stop.vue'
-import TPStop from './TPStop.vue'
-import TV2Stop from './TV2Stop.vue'
-import TPStopDemand from './TPStopDemand.vue'
+import InfoOutFront from "./InfoOutFront.vue";
+import InfoOutBack from "./InfoOutBack.vue";
+import InfoOutSide from "./InfoOutSide.vue";
+import InfoInsideOneline from "./InfoInsideOneline.vue";
+import InfoOutDuty from "./InfoOutDuty.vue";
+import InfoInsideTV1 from "./InfoInsideTV1.vue";
+import InfoInsideTV2 from "./InfoInsideTV2.vue";
+import InfoInsideTP from "./InfoInsideTP.vue";
 
 export default {
-  name: 'RIS_II',
+  name: "RIS_II",
   components: {
-	'line-out': LineOut,
-	'destination-one-line-out': DestinationOneLineOut,
-	'tv1-stop': TV1Stop,
-	'tp-stop': TPStop,
-	'tv2-stop': TV2Stop,
-	'tp-stop-demand': TPStopDemand
-  }
-}
+    "info-out-front": InfoOutFront,
+    "info-out-back": InfoOutBack,
+    "info-out-side": InfoOutSide,
+    "info-inside-oneline": InfoInsideOneline,
+    "info-out-duty": InfoOutDuty,
+    "info-inside-tv1": InfoInsideTV1,
+    "info-inside-tv2": InfoInsideTV2,
+    "info-inside-tp": InfoInsideTP,
+  },
+};
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-
-.bocni_smer {
-	height: 25px;
-	width: 250px;
-    border: 1px solid black;
-    background-color: black;
-    color: #0DC958;
-    font-size: 20px;
-}
-
-.bocni_pres {
-	height: 25px;
-	width: 250px;
-    border: 1px solid black;
-    background-color: black;
-    color: #0DC958;
-    font-size: 20px;
-}
-
-.vnitrni_maly_linka {
-	height: 25px;
-	width: 55px;
-    background-color: #8B0000;
-    color: red;
-    font-size: 20px;
-}
-
-.vnitrni_maly_Tzastavka {
-	height: 25px;
-	width: 284px;
-    background-color: #8B0000;
-    color: red;
-    font-size: 20px;
-}
-
-.vnitrni_maly_cas {
-	height: 25px;
-	width: 100px;
-    background-color: #8B0000;
-    color: red;
-    font-size: 20px;
-}
-
-#kurzovka{
-	position: absolute;
-	left: 300px;
-	top: 275px;
-	border: 0px solid black;
-	background-color: black;
-}
-
-#kurz_zacvik{
-	position: absolute;
-	left: 450px;
-	top: 125px;
-	width: 97px;
-	height: 21px;
-	font-size: 17px;
-	vertical-align: middle;
-}
-
-.kurz_priznak {
-	height: 35px;
-	width: 25px;
-	font-size: 20px;
-	color: orange;
-	text-align: center;
-	vertical-align: sub;
-	padding: 0px;
-}
-
-.kurz_linka {
-	height: 35px;
-	width: 25px;
-	font-size: 20px;
-	color: orange;
-	text-align: right;
-	vertical-align: sub;
-	padding: 0px;
-}
-
-.kurz_por {
-	font-size: 25px;
-	height: 35px;
-	width: 40px;
-	color: orange;
-	text-align: left;
-	vertical-align: sub;
-	padding: 0px;
-}
-
-#vnitrni_tv {
-	position: absolute;
-	left: 470px;
-	top: 100px;
-	height: 150px;
-	width: 390px;
-    border: 1px solid black;
-    font-size: 20px;
-    background-color: darkgray;
-    border-collapse: collapse;
-}
-
-.tv_okrajhd {
-	height: 10px;
-    background-color: black;
-}
-
-.tv_okrajlp {
-	width: 10px;
-    background-color: black;
-}
-
-#vnitrni_tvn {
-	position: absolute;
-	left: 880px;
-	top: 100px;
-	height: 150px;
-	width: 570px;
-    border: 1px solid black;
-    font-size: 20px;
-    background-color: darkgray;
-    border-collapse: collapse;
-}
-
-.tvn_okrajhd {
-	height: 10px;
-    background-color: black;
-}
-
-.tvn_okrajlp {
-	width: 10px;
-    background-color: black;
-}
-
-.tvn_linka {
-	color:black;
-	font-family:Arial;
-	text-transform: uppercase;
-}
-
-.tvn_linkax {
-	color:red;
-	font-family:Arial;
-	background-color: darkgray;
-	height: 25px;
-}
-
-.tvn_zastavka {
-	color:black;
-	font-family:Arial;
-	background-color: yellow;
-	text-align: left;
-	padding-left: 10px;
-}
-
-.tvn_zastavkak {
-	color:black;
-	font-family:Arial;
-	background-color: white;
-	text-align: left;
-	padding-left: 3px;
-	text-transform: uppercase;
-	font-size: 16px;
-	height: 20px;
-}
-
-.tvn_zast {
-	font-family:Arial;
-	background-color: darkblue;
-	text-align: center;
-	padding-left: 10px;
-}
-
-.tvn_zastavkax {
-	color:white;
-	font-family:Arial;
-	background-color: darkblue;
-	text-align: left;
-	font-size: 16px;
-	height: 30px;
-}
-
-.tvn_linkacas {
-	color:white;
-	font-family:Arial;
-	background-color: darkblue;
-	text-align: center;
-}
-
-.tvn_zonax {
-	color:black;
-	font-family:Arial;
-	background-color: powderblue;
-	text-align: center;
-	font-size: 10px;
-}
-
-.tvn_zastavkazx {
-	color:white;
-	font-family:Arial;
-	background-color: darkgray;
-	text-align: left;
-	font-size: 7px;
-	color: red;
-	height: 10px;
-	text-transform: uppercase;
-}
-
-.tvn_zastavkaz {
-	color:white;
-	font-family:Arial;
-	background-color: yellow;
-	text-align: left;
-	font-size: 7px;
-	color: red;
-	height: 10px;
-	text-transform: uppercase;
-}
-
-.tvn_zonacas {
-	color:black;
-	font-family:Arial;
-	background-color: yellow;
-	width: 55px;
-}
-
-.tvn_zonacasx {
-	color:white;
-	font-family:Arial;
-	background-color: darkgray;
-}
-
-.tvn_zonacasz {
-	color:white;
-	font-family:Arial;
-	background-color: yellow;
-}
-
-.tvn_info {
-	background-color: darkred;
-	font-family: Calibri;
-	text-align: left;
-	padding-left: 45px;
-	font-weight: normal;
-}
-
-#vnitrni_tp {
-	position: absolute;
-	left: 5px;
-	top: 360px;
-	height: 40px;
-    border: 3px solid black;
-    font-size: 15px;
-    background-color: darkblue;
-	color:white;
-}
-
 .black {
-    color: black;
-}
-
-.vnitrni_maly {
-    border: 1px solid black;
-    background-color: #8B0000;
-    color: red;
-    font-size: 20px;
-}
-
-.vnitrni_maly_smer {
-	height: 25px;
-	width: 329px;
-    background-color: #8B0000;
-    color: red;
-    font-size: 20px;
-    text-transform: uppercase;
-}
-
-.vnitrni_maly_znameni {
-	height: 25px;
-	width: 388px;
-    background-color: #8B0000;
-    color: red;
-    font-size: 20px;
-}
-
-.vnitrni_maly_sights {
-	height: 25px;
-	width: 388px;
-    background-color: #8B0000;
-    color: red;
-    font-size: 20px;
-}
-
-.vnitrni_maly_zona {
-	height: 25px;
-	width: 225px;
-    background-color: #8B0000;
-    color: red;
-    font-size: 20px;
-}
-
-#venku_celni {
-	position: absolute;
-	background-color: black;
-	left: 5px;
-	top: 5px;
-	border: 2px solid black;
-}
-
-#venku_zadni {
-	position: absolute;
-	background-color: black;
-	left: 490px;
-	top: 5px;
-	border: 2px solid black;
-}
-
-#venku_bocni {
-	position: absolute;
-	background-color: black;
-	left: 650px;
-	top: 5px;
-	border: 2px solid black;
+  color: black;
 }
 
 #tiraz {
-	color:black;
-	font-family:Arial;
-	font-size:9px;
-	position: absolute;
-	top: 680px;
-}
-
-.tv_linka {
-	color:black;
-	font-family:Arial;
-	background-color: orange;
-	height: 25px;
-	width: 45px;
-	text-transform: uppercase;
-}
-
-.tv_zastavka {
-	color:black;
-	font-family:Arial;
-	background-color: yellow;
-	text-align: left;
-	padding-left: 10px;
-}
-
-.tv_zastavkak {
-	color:black;
-	font-family:Arial;
-	background-color: orange;
-	text-align: left;
-	padding-left: 3px;
-	text-transform: uppercase;
-}
-
-.tv_zastavkaz {
-	color:white;
-	font-family:Arial;
-	background-color: yellow;
-	text-align: left;
-	padding-left: 10px;
-	font-size: 7px;
-	color: red;
-	height: 10px;
-	text-transform: uppercase;
-}
-
-.tv_zonacas {
-	color:black;
-	font-family:Arial;
-	background-color: yellow;
-	width: 55px;
-}
-
-.tv_zonacasz {
-	color:white;
-	font-family:Arial;
-	background-color: yellow;
-}
-
-#tp_linka {
-	color: darkblue;
-	font-family:Arial;
-	background-color: black;
-	height: 30px;
-	width: 80px;
-	text-align: center;
-	background-color: white;
-	font-size: 40px;
-	font-weight: bold;
-}
-
-.tp_linkax {
-	color:darkblue;
-	font-family:Arial;
-	background-color: white;
-	height: 20px;
-}
-
-#tp_cas {
-	color: darkblue;
-	font-family:Arial;
-	background-color: white;
-	width: 40px;
-	height: 25px;
-	text-align: center;
-	font-weight: bold;
-	font-size: 20px;
-}
-
-#tp_datum {
-	color: darkblue;
-	font-family:Arial;
-	background-color: white;
-	width: 40px;
-	text-align: center;
-	font-weight: bold;
-	font-size: 17px;
-}
-
-#tp_den {
-	color: darkblue;
-	font-family:Arial;
-	background-color: white;
-	width: 40px;
-	text-align: center;
-	font-weight: bold;
-	font-size: 17px;
-}
-
-#tp_zastavka0 {
-	color: darkblue;
-	font-family:Arial;
-	background-color: white;
-	width:190px;
-	height: 65px;
-	font-size: 20px;
-	font-weight: bold;
-}
-
-#tp_zast_prakt {
-	color: darkblue;
-	font-family:Arial;
-	background-color: white;
-	width:180px;
-	height: 25px;
-}
-
-.tp_zona {
-	color: darkblue;
-	font-family:Arial;
-	background-color: white;
-	width:190px;
-	height: 20px;
-}
-
-#tp_znameni {
-	color: #00BFFF;
-	font-family:Arial;
-	background-color: black;
-	text-transform: uppercase;
-}
-
-.tp_znamenix {
-	text-align: center;
-	height: 12px;
-}
-
-.tp_zastavkax {
-	color: white;
-	font-family:Arial;
-	width:85px;
-	height: 125px;
-	font-size: 7pt;
-	transform: rotate(300deg);
-	text-align: left;
-}
-
-#tp_zastavkak {
-	color: darkblue;
-	font-family:Arial;
-	background-color: white;
-	width:180px;
-	text-transform: uppercase;
-	text-align: right;
-	font-size: 20px;
-	font-weight: bold;
-}
-
-#tp_konec_popis {
-	color: darkblue;
-	font-family:Arial;
-	background-color: white;
-	width:180px;
-	height: 25px;
-	text-align: right;
-	font-size: 15px;
-}
-
-#tp_mapa {
-	background-color: black;
-	width: 250px;
-	height: 250px;
-	text-align: center;
+  color: black;
+  font-family: Arial;
+  font-size: 9px;
+  position: absolute;
+  top: 680px;
 }
 
 #nastaveni {
-	position: absolute;
-	font-family:Arial;
-	font-weight: bold;
-	top:635px;
-	width:100px;
-	height:50px;
-	left:50px;
-    border: 1px solid black;
+  position: absolute;
+  font-family: Arial;
+  font-weight: bold;
+  top: 635px;
+  width: 100px;
+  height: 50px;
+  left: 50px;
+  border: 1px solid black;
 }
 
 #dalsi {
-	position: absolute;
-	font-family:Arial;
-	font-weight: bold;
-	font-size: 30px;
-	top: 630px;
-	width:60px;
-	left:540px;
-	height:50px;
-	background-color: white;
-	color: black;
-	border: 1px solid black;
+  position: absolute;
+  font-family: Arial;
+  font-weight: bold;
+  font-size: 30px;
+  top: 630px;
+  width: 60px;
+  left: 600px;
+  height: 50px;
+  background-color: white;
+  color: black;
+  border: 1px solid black;
 }
 
 #konec {
-	position: absolute;
-	font-family:Arial;
-	font-weight: bold;
-	top:630px;
-	width:65px;
-	left: 620px;
-	height:50px;
-	background-color: darkred;
-	color: black;
-	border: 1px solid black;
-	text-align: center;
+  position: absolute;
+  font-family: Arial;
+  font-weight: bold;
+  top: 630px;
+  width: 65px;
+  left: 680px;
+  height: 50px;
+  background-color: darkred;
+  color: black;
+  border: 1px solid black;
+  text-align: center;
 }
 
 #rucnihlaseni {
-	position: absolute;
-	font-family:Arial;
-	font-weight: bold;
-	top:635px;
-	width:150px;
-	left:450px;
-	height:50px;
-	background-color: #ffcc00;
-	color: black;
-	border: 1px solid black;
+  position: absolute;
+  font-family: Arial;
+  font-weight: bold;
+  top: 635px;
+  width: 150px;
+  left: 450px;
+  height: 50px;
+  background-color: #ffcc00;
+  color: black;
+  border: 1px solid black;
 }
 
-.celni_male {
-    margin: 0px;
+#aku_zvuk {
+  position: absolute;
+  margin: 0px;
+  top: 475px;
+  left: 80px;
+  background-color: blue;
+  color: white;
+  border: 1px solid black;
+  width: 90%;
+  height: 20px;
 }
 
-
-#aku_zvuk{
-	position: absolute;
-    margin: 0px;
-    top: 475px;
-    left: 80px;
-    background-color: blue;
-    color: white;
-    border: 1px solid black;
-    width: 90%;
-    height: 20px;
+#aku_text {
+  position: absolute;
+  margin: 0px;
+  top: 475px;
+  left: 15px;
+  background-color: none;
+  color: black;
+  width: 90px;
+  text-align: left;
 }
 
-#aku_text{
-	position: absolute;
-    margin: 0px;
-    top: 475px;
-    left: 15px;
-    background-color: none;
-    color: black;
-    width: 90px;
-    text-align: left;
+#DPMB {
+  position: absolute;
+  top: 280px;
+  left: 50px;
+  height: 50px;
 }
 
-#DPMB{
-	position: absolute;
-    top: 280px;
-    left: 50px;
-    height: 50px;
+#PC {
+  position: absolute;
+  top: 622px;
+  left: 10px;
+  height: 50px;
+  background-color: grey;
+  border: 1px black solid;
+  padding: 5px;
+  width: 550px;
 }
-
-#PC{
-	position: absolute;
-    top: 630px;
-    left: 20px;
-    height: 50px;
-}
-
 </style>
