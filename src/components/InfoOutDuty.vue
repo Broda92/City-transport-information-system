@@ -1,7 +1,7 @@
 <template>
   <table>
     <tr id="kurzovka">
-      <th class="kurz_priznak" id="kurz_priznak">Z</th>
+      <th class="kurz_priznak" id="kurz_priznak">{{ priznak }}</th>
       <th class="kurz_linka" id="kurz_linka">{{ kurz_linka }}</th>
       <th class="kurz_por" id="kurz_por">{{ kurz_poradi }}</th>
     </tr>
@@ -11,7 +11,7 @@
 <script>
 export default {
   name: "InfoOutDuty",
-  props: ["kurz"],
+  props: ["kurz", "priznak"],
   data() {
     return this.kurz;
   },

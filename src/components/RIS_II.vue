@@ -8,7 +8,7 @@
   <br />
   <info-inside-oneline linka="5"></info-inside-oneline>
   <br />
-  <info-out-duty v-bind:kurz="kurz"></info-out-duty>
+  <info-out-duty v-bind:kurz="kurz" v-bind:priznak="mode"></info-out-duty>
   <br />
   <info-inside-tv1 linka="6"></info-inside-tv1>
   <br />
@@ -34,14 +34,14 @@
       name="kurz"
       placeholder="kurz (pětimístné číslo LLLPP)"
     />
-    <select name="režim">
-      <option selected="selected">standardní režim</option>
-      <option>bez přihlášeného řidiče (X)</option>
-      <option>řidič v zácviku (Z)</option>
-      <option>odklon (K)</option>
-      <option>posilový spoj (P)</option>
-      <option>náhradní doprava (N)</option>
-      <option>odlišný cíl (C)</option>
+    <select v-model="mode" name="režim">
+      <option
+        v-for="option in mode_options"
+        v-bind:key="option.value"
+        v-bind:value="option.value"
+      >
+        {{ option.text }}
+      </option>
     </select>
     <select name="route">
       <option selected="selected">zvolte linku a směr</option>
@@ -59,13 +59,6 @@
       77.x
     </b>
   </p>
-
-  <!-- X = vůz jede bez přihlášeného řidiče,
-	Z = ve voze je řidič v zácviku,
-	K = vozidlo jede v režimu Odklon,
-	P = vozidlo jede v režimu Posila,
-	N = vozidlo jede v režimu Náhradní doprava,
-	C = vozidlo má nastavený jiný cíl, než je cílová zastávka -->
 </template>
 
 <script>
@@ -93,6 +86,16 @@ export default {
   data() {
     return {
       kurz: "",
+      mode: this.option,
+      mode_options: [
+        { text: "standardní režim", value: "" },
+        { text: "bez přihlášeného řidiče (X)", value: "X" },
+        { text: "řidič v zácviku (Z)", value: "Z" },
+        { text: "odklon (K)", value: "K" },
+        { text: "posilový spoj (P)", value: "P" },
+        { text: "náhradní doprava (N)", value: "N" },
+        { text: "odlišný cíl (C)", value: "C" },
+      ],
     };
   },
 };
