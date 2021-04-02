@@ -1,20 +1,20 @@
 <template>
   <br />
-  <info-out-front></info-out-front>
+  <info-out-front linka="2"></info-out-front>
   <br />
-  <info-out-back></info-out-back>
+  <info-out-back linka="3"></info-out-back>
   <br />
-  <info-out-side></info-out-side>
+  <info-out-side linka="4"></info-out-side>
   <br />
-  <info-inside-oneline></info-inside-oneline>
+  <info-inside-oneline linka="5"></info-inside-oneline>
   <br />
-  <info-out-duty></info-out-duty>
+  <info-out-duty v-bind:kurz="kurz"></info-out-duty>
   <br />
-  <info-inside-tv1></info-inside-tv1>
+  <info-inside-tv1 linka="6"></info-inside-tv1>
   <br />
-  <info-inside-tv2></info-inside-tv2>
+  <info-inside-tv2 linka="8"></info-inside-tv2>
   <br />
-  <info-inside-tp></info-inside-tp>
+  <info-inside-tp linka="9"></info-inside-tp>
   <br />
   <!--<input type="button" id="nastaveni" value="Nastavení" onclick="nastaveni(data)" onkeydown="key(event)" />-->
   <input type="button" id="dalsi" value="▼" onclick="dalsi()" onkeydown="key(event)" />
@@ -28,7 +28,12 @@
   <!--<input type="button" id="rucnihlaseni" value="RUČNÍ HLÁŠENÍ" onclick="rucni()" onkeydown="key(event)"/>-->
 
   <div id="PC">
-    <input type="text" name="" placeholder="vložte kurz" />
+    <input
+      type="text"
+      v-model="kurz"
+      name="kurz"
+      placeholder="kurz (pětimístné číslo LLLPP)"
+    />
     <select name="režim">
       <option selected="selected">standardní režim</option>
       <option>bez přihlášeného řidiče (X)</option>
@@ -85,7 +90,14 @@ export default {
     "info-inside-tv2": InfoInsideTV2,
     "info-inside-tp": InfoInsideTP,
   },
+  data() {
+    return {
+      kurz: "",
+    };
+  },
 };
+
+// zastavka: nazev / zona / znameni / sights / linka / cil / polohaXY
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->

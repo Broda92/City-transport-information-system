@@ -2,8 +2,8 @@
   <table>
     <tr id="kurzovka">
       <th class="kurz_priznak" id="kurz_priznak">Z</th>
-      <th class="kurz_linka" id="kurz_linka">001</th>
-      <th class="kurz_por" id="kurz_por">01</th>
+      <th class="kurz_linka" id="kurz_linka">{{ kurz_linka }}</th>
+      <th class="kurz_por" id="kurz_por">{{ kurz_poradi }}</th>
     </tr>
   </table>
 </template>
@@ -11,6 +11,18 @@
 <script>
 export default {
   name: "InfoOutDuty",
+  props: ["kurz"],
+  data() {
+    return this.kurz;
+  },
+  computed: {
+    kurz_linka() {
+      return [this.kurz[0], this.kurz[1], this.kurz[2]].join("");
+    },
+    kurz_poradi() {
+      return [this.kurz[3], this.kurz[4]].join("");
+    },
+  },
 };
 </script>
 

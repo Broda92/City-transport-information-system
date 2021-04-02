@@ -1,7 +1,7 @@
 <template>
   <table id="venku_celni">
     <tr>
-      <line-out></line-out>
+      <line-out linka="2"></line-out>
       <destination-one-line-out></destination-one-line-out>
     </tr>
   </table>
@@ -16,6 +16,12 @@ export default {
   components: {
     "line-out": LineOut,
     "destination-one-line-out": DestinationOneLineOut,
+  },
+  props: ["linka"],
+  data() {
+    let linka = this.linka;
+    console.log(linka);
+    return linka;
   },
 };
 </script>

@@ -1,7 +1,7 @@
 <template>
   <table id="venku_zadni">
     <tr>
-      <line-out></line-out>
+      <line-out linka="3"></line-out>
     </tr>
   </table>
 </template>

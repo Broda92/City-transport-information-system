@@ -1,7 +1,7 @@
 <template>
   <table id="venku_bocni">
     <tr>
-      <line-out rowspan="2"></line-out>
+      <line-out rowspan="2" linka="4"></line-out>
       <th class="bocni_pres" id="bocni_pres">-Semilasso-</th>
     </tr>
     <tr>
