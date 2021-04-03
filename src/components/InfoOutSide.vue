@@ -1,11 +1,11 @@
 <template>
   <table id="venku_bocni">
     <tr>
-      <line-out rowspan="2" linka="4"></line-out>
-      <th class="bocni_pres" id="bocni_pres">-Semilasso-</th>
+      <line-out rowspan="2" v-bind:line="line"></line-out>
+      <th class="bocni_pres" id="bocni_pres">{{ direction }}</th>
     </tr>
     <tr>
-      <th class="bocni_smer" id="bocni_smer">ŘEČKOVICE</th>
+      <th class="bocni_smer" id="bocni_smer">{{ destination }}</th>
     </tr>
   </table>
 </template>
@@ -17,6 +17,30 @@ export default {
   name: "InfoOutSide",
   components: {
     "line-out": LineOut,
+  },
+  props: ["data", "stop_id"],
+  computed: {
+    line() {
+      if (this.data[this.stop_id]) {
+        return this.data[this.stop_id]["linka"];
+      } else {
+        return "";
+      }
+    },
+    direction() {
+      if (this.data[this.stop_id]) {
+        return this.data[this.stop_id]["pres"];
+      } else {
+        return "";
+      }
+    },
+    destination() {
+      if (this.data[this.stop_id]) {
+        return this.data[this.stop_id]["smer_bocni"];
+      } else {
+        return "";
+      }
+    },
   },
 };
 </script>

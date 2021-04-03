@@ -1,10 +1,11 @@
 <template>
-  <th class="celni_smer">ŘEČKOVICE</th>
+  <th class="celni_smer">{{ destination }}</th>
 </template>
 
 <script>
 export default {
   name: "DestinationOneLineOut",
+  props: ["destination"],
 };
 </script>
 

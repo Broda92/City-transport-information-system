@@ -10,6 +10,7 @@
   "dependencies": {
     "convert-excel-to-json": "^1.7.0",
     "core-js": "^3.6.5",
+    "mapy-cz": "0.0.1",
     "vue": "^3.0.0",
     "vuex": "^3.6.2"
   },

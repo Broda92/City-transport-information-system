@@ -2,22 +2,22 @@
   <table class="vnitrni_maly" id="vnitrni_maly_1">
     <tr>
       <th class="vnitrni_maly_Tzastavka" id="vnitrni_maly1_zastavka0">
-        T - Moravské náměstí
+        {{ stop }}
       </th>
-      <th class="vnitrni_maly_cas" id="vnitrni_maly1_cas">21:45</th>
+      <th class="vnitrni_maly_cas" id="vnitrni_maly1_cas">{{ time }}</th>
     </tr>
   </table>
   <table class="vnitrni_maly" id="vnitrni_maly_2">
     <tr>
-      <th class="vnitrni_maly_linka" id="vnitrni_maly2_linka">1</th>
-      <th class="vnitrni_maly_zona" id="vnitrni_maly2_zona0">Zóna 100</th>
-      <th class="vnitrni_maly_cas" id="vnitrni_maly2_cas">21:45</th>
+      <th class="vnitrni_maly_linka" id="vnitrni_maly2_linka">{{ line }}</th>
+      <th class="vnitrni_maly_zona" id="vnitrni_maly2_zona0">Zóna {{ zone }}</th>
+      <th class="vnitrni_maly_cas" id="vnitrni_maly2_cas">{{ time }}</th>
     </tr>
   </table>
   <table class="vnitrni_maly" id="vnitrni_maly_3">
     <tr>
-      <th class="vnitrni_maly_linka" id="vnitrni_maly3_linka">1</th>
-      <th class="vnitrni_maly_smer" id="vnitrni_maly3_zastavkak">ŘEČKOVICE</th>
+      <th class="vnitrni_maly_linka" id="vnitrni_maly3_linka">{{ line }}</th>
+      <th class="vnitrni_maly_smer" id="vnitrni_maly3_zastavkak">{{ destination }}</th>
     </tr>
   </table>
   <table class="vnitrni_maly" id="vnitrni_maly_4">
@@ -31,7 +31,7 @@
           scrollamount="5"
           scrolldelay="20"
           id="vnitrni_maly4_znameni0"
-          >Zastávka na znamení</marquee
+          >{{ stop_request }}</marquee
         >
       </th>
     </tr>
@@ -47,7 +47,7 @@
           scrollamount="5"
           scrolldelay="20"
           id="vnitrni_maly5_sights0"
-          >Rektorát MU</marquee
+          >{{ stop_sights }}</marquee
         >
       </th>
     </tr>
@@ -57,6 +57,58 @@
 <script>
 export default {
   name: "InfoInsideOneline",
+  props: ["data", "stop_id"],
+  computed: {
+    stop() {
+      if (this.data[this.stop_id]) {
+        return this.data[this.stop_id]["zastavka"];
+      } else {
+        return "";
+      }
+    },
+    time() {
+      return new Date().toLocaleTimeString("en-US", {
+        hour12: false,
+        hour: "numeric",
+        minute: "numeric",
+      });
+    },
+    line() {
+      if (this.data[this.stop_id]) {
+        return this.data[this.stop_id]["linka"];
+      } else {
+        return "";
+      }
+    },
+    zone() {
+      if (this.data[this.stop_id]) {
+        return this.data[this.stop_id]["zona"];
+      } else {
+        return "";
+      }
+    },
+    destination() {
+      if (this.data[this.stop_id]) {
+        return this.data[this.stop_id]["smer_vnitrni"];
+      } else {
+        return "";
+      }
+    },
+    stop_request() {
+      if (this.data[this.stop_id]) {
+        return this.data[this.stop_id]["znameni"];
+      } else {
+        return "";
+      }
+    },
+    stop_sights() {
+      if (this.data[this.stop_id]) {
+        return this.data[this.stop_id]["sights"];
+      } else {
+        return "";
+      }
+    },
+  },
 };
 </script>
 

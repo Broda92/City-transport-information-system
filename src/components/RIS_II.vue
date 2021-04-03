@@ -1,30 +1,25 @@
 <template>
   <br />
-  <info-out-front linka="2"></info-out-front>
+  <info-out-front v-bind:data="trasa" v-bind:stop_id="stop_id"></info-out-front>
   <br />
-  <info-out-back linka="3"></info-out-back>
+  <info-out-back v-bind:data="trasa" v-bind:stop_id="stop_id"></info-out-back>
   <br />
-  <info-out-side linka="4"></info-out-side>
+  <info-out-side v-bind:data="trasa" v-bind:stop_id="stop_id"></info-out-side>
   <br />
-  <info-inside-oneline linka="5"></info-inside-oneline>
+  <info-inside-oneline v-bind:data="trasa" v-bind:stop_id="stop_id"></info-inside-oneline>
+  <br />
+  <info-inside-tv1 v-bind:data="trasa" v-bind:stop_id="stop_id"></info-inside-tv1>
+  <br />
+  <info-inside-tv2 v-bind:data="trasa" v-bind:stop_id="stop_id"></info-inside-tv2>
+  <br />
+  <info-inside-tp v-bind:data="trasa" v-bind:stop_id="stop_id"></info-inside-tp>
   <br />
   <info-out-duty v-bind:kurz="kurz" v-bind:priznak="mode"></info-out-duty>
   <br />
-  <info-inside-tv1 linka="6"></info-inside-tv1>
-  <br />
-  <info-inside-tv2 linka="8"></info-inside-tv2>
-  <br />
-  <info-inside-tp linka="9"></info-inside-tp>
-  <br />
   <!--<input type="button" id="nastaveni" value="Nastavení" onclick="nastaveni(data)" onkeydown="key(event)" />-->
-  <input type="button" id="dalsi" value="▼" onclick="dalsi()" onkeydown="key(event)" />
-  <input
-    type="button"
-    id="konec"
-    value="KONEC"
-    onclick="konec()"
-    onkeydown="key(event)"
-  />
+  <input type="button" id="dalsi" value="▼" v-on:click="stop_id++" />
+  <input type="button" id="predchozi" value="▲" v-on:click="stop_id--" />
+  <input type="button" id="konec" value="KONEC" v-on:click="konec()" />
   <!--<input type="button" id="rucnihlaseni" value="RUČNÍ HLÁŠENÍ" onclick="rucni()" onkeydown="key(event)"/>-->
 
   <div id="PC">
@@ -34,7 +29,7 @@
       name="kurz"
       placeholder="kurz (pětimístné číslo LLLPP)"
     />
-    <select v-model="mode" name="režim">
+    <select v-model="mode">
       <option
         v-for="option in mode_options"
         v-bind:key="option.value"
@@ -43,8 +38,11 @@
         {{ option.text }}
       </option>
     </select>
-    <select name="route">
-      <option selected="selected">zvolte linku a směr</option>
+    <select v-model="trasa" v-on:change="stop_reset()">
+      <!--<option selected="selected">zvolte linku a směr</option>-->
+      <option v-for="route in routes" v-bind:key="route" v-bind:value="route">
+        {{ "linka " + route[0]["linka"] + " směr " + route[0]["smer_vnitrni"] }}
+      </option>
     </select>
     <br />
     <select name="message">
@@ -83,10 +81,11 @@ export default {
     "info-inside-tv2": InfoInsideTV2,
     "info-inside-tp": InfoInsideTP,
   },
+  props: ["routes"],
   data() {
     return {
       kurz: "",
-      mode: this.option,
+      mode: "",
       mode_options: [
         { text: "standardní režim", value: "" },
         { text: "bez přihlášeného řidiče (X)", value: "X" },
@@ -96,11 +95,19 @@ export default {
         { text: "náhradní doprava (N)", value: "N" },
         { text: "odlišný cíl (C)", value: "C" },
       ],
+      trasa: this.routes,
+      stop_id: 0,
     };
   },
+  methods: {
+    stop_reset() {
+      this.stop_id = 0;
+    },
+    konec() {
+      this.trasa = "";
+    },
+  },
 };
-
-// zastavka: nazev / zona / znameni / sights / linka / cil / polohaXY
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
@@ -128,6 +135,20 @@ export default {
   border: 1px solid black;
 }
 
+#predchozi {
+  position: absolute;
+  font-family: Arial;
+  font-weight: bold;
+  font-size: 30px;
+  top: 630px;
+  width: 60px;
+  left: 770px;
+  height: 50px;
+  background-color: white;
+  color: black;
+  border: 1px solid black;
+}
+
 #dalsi {
   position: absolute;
   font-family: Arial;
@@ -135,7 +156,7 @@ export default {
   font-size: 30px;
   top: 630px;
   width: 60px;
-  left: 600px;
+  left: 850px;
   height: 50px;
   background-color: white;
   color: black;
@@ -148,7 +169,7 @@ export default {
   font-weight: bold;
   top: 630px;
   width: 65px;
-  left: 680px;
+  left: 930px;
   height: 50px;
   background-color: darkred;
   color: black;
@@ -207,6 +228,6 @@ export default {
   background-color: grey;
   border: 1px black solid;
   padding: 5px;
-  width: 550px;
+  width: 700px;
 }
 </style>

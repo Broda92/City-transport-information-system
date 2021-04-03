@@ -1,16 +1,22 @@
 <template>
-  <RIS_II/>
+  <RIS_II v-bind:routes="myJson" />
 </template>
 
 <script>
-import RIS_II from './components/RIS_II.vue';
+import RIS_II from "./components/RIS_II.vue";
+import json from "./assets/MHD_Brno_data.json";
 
 export default {
-  name: 'App',
+  name: "App",
   components: {
-    RIS_II
-  }
-}
+    RIS_II,
+  },
+  data() {
+    return {
+      myJson: json,
+    };
+  },
+};
 </script>
 
 <style>

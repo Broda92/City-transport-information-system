@@ -1,7 +1,7 @@
 <template>
   <table id="venku_zadni">
     <tr>
-      <line-out linka="3"></line-out>
+      <line-out v-bind:line="line"></line-out>
     </tr>
   </table>
 </template>
@@ -13,6 +13,16 @@ export default {
   name: "InfoOutBack",
   components: {
     "line-out": LineOut,
+  },
+  props: ["data", "stop_id"],
+  computed: {
+    line() {
+      if (this.data[this.stop_id]) {
+        return this.data[this.stop_id]["linka"];
+      } else {
+        return "";
+      }
+    },
   },
 };
 </script>

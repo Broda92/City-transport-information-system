@@ -5,15 +5,15 @@
     </tr>
     <tr>
       <th class="tv_okrajlp" rowspan="9"></th>
-      <th id="tv_linka" class="tv_linka">1</th>
-      <th class="tv_zastavkak" id="tv_zastavkak">ŘEČKOVICE</th>
-      <th class="tv_zonacas" id="tv_cas">21:45</th>
+      <th id="tv_linka" class="tv_linka">{{ line }}</th>
+      <th class="tv_zastavkak" id="tv_zastavkak">{{ destination }}</th>
+      <th class="tv_zonacas" id="tv_cas">{{ time }}</th>
       <th class="tv_okrajlp" rowspan="9"></th>
     </tr>
-    <tv1-stop></tv1-stop>
-    <tv1-stop></tv1-stop>
-    <tv1-stop></tv1-stop>
-    <tv1-stop></tv1-stop>
+    <tv1-stop v-bind:data="data" v-bind:next="3" v-bind:stop_id="stop_id"></tv1-stop>
+    <tv1-stop v-bind:data="data" v-bind:next="2" v-bind:stop_id="stop_id"></tv1-stop>
+    <tv1-stop v-bind:data="data" v-bind:next="1" v-bind:stop_id="stop_id"></tv1-stop>
+    <tv1-stop v-bind:data="data" v-bind:next="0" v-bind:stop_id="stop_id"></tv1-stop>
     <tr>
       <th class="tv_okrajhd" colspan="5"></th>
     </tr>
@@ -27,6 +27,30 @@ export default {
   name: "InfoInsideLCD1",
   components: {
     "tv1-stop": TV1Stop,
+  },
+  props: ["data", "stop_id"],
+  computed: {
+    line() {
+      if (this.data[this.stop_id]) {
+        return this.data[this.stop_id]["linka"];
+      } else {
+        return "";
+      }
+    },
+    destination() {
+      if (this.data[this.stop_id]) {
+        return this.data[this.stop_id]["smer_tv"];
+      } else {
+        return "";
+      }
+    },
+    time() {
+      return new Date().toLocaleTimeString("en-US", {
+        hour12: false,
+        hour: "numeric",
+        minute: "numeric",
+      });
+    },
   },
 };
 </script>

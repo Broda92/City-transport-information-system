@@ -1,15 +1,13 @@
 <template>
-  <th class="venku_linka">{{ linka }}</th>
+  <th class="venku_linka">{{ line }}</th>
 </template>
 
 <script>
 export default {
   name: "LineOut",
-  props: ["linka"],
+  props: ["line"],
   data() {
-    let linka = this.linka;
-    console.log(linka);
-    return linka;
+    return this.line;
   },
 };
 </script>
