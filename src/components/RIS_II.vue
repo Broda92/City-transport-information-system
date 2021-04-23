@@ -14,22 +14,22 @@
   <br />
   <info-inside-tp v-bind:data="trasa" v-bind:stop_id="stop_id"></info-inside-tp>
   <br />
-  <info-out-duty v-bind:kurz="kurz" v-bind:priznak="mode"></info-out-duty>
+  <info-out-duty></info-out-duty>
   <br />
   <!--<input type="button" id="nastaveni" value="Nastavení" onclick="nastaveni(data)" onkeydown="key(event)" />-->
-  <input type="button" id="dalsi" value="▼" v-on:click="stop_id++" />
-  <input type="button" id="predchozi" value="▲" v-on:click="stop_id--" />
-  <input type="button" id="konec" value="KONEC" v-on:click="konec()" />
+  <input type="button" id="dalsi" value="▼" v-on:click="stop_next()" />
+  <input type="button" id="predchozi" value="▲" v-on:click="stop_previous()" />
+  <input type="button" id="konec" value="KONEC" v-on:click="end()" />
   <!--<input type="button" id="rucnihlaseni" value="RUČNÍ HLÁŠENÍ" onclick="rucni()" onkeydown="key(event)"/>-->
 
   <div id="PC">
     <input
       type="text"
-      v-model="kurz"
+      @input="set_kurz"
       name="kurz"
       placeholder="kurz (pětimístné číslo LLLPP)"
     />
-    <select v-model="mode">
+    <select @change="set_mode">
       <option
         v-for="option in mode_options"
         v-bind:key="option.value"
@@ -38,7 +38,7 @@
         {{ option.text }}
       </option>
     </select>
-    <select v-model="trasa" v-on:change="stop_reset()">
+    <select v-model="trasa" @change="stop_reset()">
       <!--<option selected="selected">zvolte linku a směr</option>-->
       <option v-for="route in routes" v-bind:key="route" v-bind:value="route">
         {{ "linka " + route[0]["linka"] + " směr " + route[0]["smer_vnitrni"] }}
@@ -84,8 +84,6 @@ export default {
   props: ["routes"],
   data() {
     return {
-      kurz: "",
-      mode: "",
       mode_options: [
         { text: "standardní režim", value: "" },
         { text: "bez přihlášeného řidiče (X)", value: "X" },
@@ -96,15 +94,37 @@ export default {
         { text: "odlišný cíl (C)", value: "C" },
       ],
       trasa: this.routes,
-      stop_id: 0,
     };
   },
-  methods: {
-    stop_reset() {
-      this.stop_id = 0;
+  computed: {
+    stop_id() {
+      return this.$store.state.stop_id;
     },
-    konec() {
-      this.trasa = "";
+    /*trasa() {
+      return this.$store.state.trasa;
+    },*/
+  },
+  methods: {
+    stop_next() {
+      this.$store.commit("stop_next");
+    },
+    stop_previous() {
+      this.$store.commit("stop_previous");
+    },
+    stop_reset() {
+      this.$store.commit("stop_reset");
+    },
+    end() {
+      this.$store.commit("stop_end");
+    },
+    set_kurz(e) {
+      this.$store.commit("set_kurz", e.target.value);
+    },
+    set_mode(e) {
+      this.$store.commit("set_mode", e.target.value);
+    },
+    set_trasa(e) {
+      this.$store.commit("set_trasa", e.target.value);
     },
   },
 };
